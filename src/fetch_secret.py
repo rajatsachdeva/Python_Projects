@@ -1,7 +1,7 @@
 #!/bin/usr/python
 
 # Secret File Path
-SECRETFILEPATH="./secret/auth.txt"
+SECRETFILEPATH="../secret/auth.txt"
 
 # Fetch the access token and consumer key from secret folder
 def fetch_secret():

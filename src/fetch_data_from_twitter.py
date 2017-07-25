@@ -9,10 +9,10 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 
 # File path where fetched data will be stored
-FILEPATH="./data/twitter_data.txt"
+FILEPATH="../data/twitter_data.txt"
 
 # Secret File Path
-SECRETFILEPATH="./secret/auth.txt"
+SECRETFILEPATH="../secret/auth.txt"
 
 # Open the file
 f=open(FILEPATH, 'w')
