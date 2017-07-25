@@ -20,26 +20,19 @@ f=open(FILEPATH, 'w')
 # Fetch the access token and consumer key from secret folder
 def fetch_secret():
 	f = open(SECRETFILEPATH, 'r')
-	#authdict = {}
+	authdict = {}
 
 	for data in f.readlines():
-#       print (data)
-#       print (type(data))
-#       print(data.split("="))
 		list = data.split("=")
 		authdict[list[0]] = list[1].strip()
-#       print(list[0]," " ,list[1])
-#       print(authdict)
-
-    
-#   print('access_token = ',        access_token)
-#   print('access_token_secret = ', access_token_secret)
-#   print('consumer_key = ',        consumer_key)
-#   print('consumer_secret = ',     consumer_secret)
 	
-	#auth = OAuthHandler(consumer_key, consumer_secret)
-	#auth.set_access_token(access_token, access_token_secret)
-	return authdict
+	access_token        = authdict['access_token']
+	access_token_secret = authdict['access_token_secret']
+	consumer_key        = authdict['consumer_key']
+	consumer_secret     = authdict['consumer_secret']
+	auth = OAuthHandler(consumer_key, consumer_secret)
+	auth.set_access_token(access_token, access_token_secret)
+	return auth
 
 # Basic listener that just prints received tweets to stdout
 class StdOutListener (StreamListener):
@@ -82,17 +75,10 @@ if  __name__ == '__main__':
 
 	# Twitter authentication and the connection to Twitter streaming API
 	l = StdOutListener()
-	authdict = fetch_secret()
-	print(authdict)
-	access_token        = authdict['access_token']
-	access_token_secret = authdict['access_token_secret']
-	consumer_key        = authdict['consumer_key']
-	consumer_secret     = authdict['consumer_secret']
-	auth = OAuthHandler(consumer_key, consumer_secret)
-	auth.set_access_token(access_token, access_token_secret)
+	auth = fetch_secret()
 	stream = Stream(auth, l)
 
 	print("Fetching Tweets...")
 
-	# Filter out the Twitter Stream to Capture on only Python
+	# Filter out the Twitter Stream to Capture on Keyword 
 	stream.filter(track=['Java'])
