@@ -35,7 +35,14 @@ def fetch_secret():
 	return auth
 
 # Basic listener that just prints received tweets to stdout
-class StdOutListener (StreamListener):
+class TwitterListener (StreamListener):
+
+	def __init__(self, phrases):
+		# Get access to twitter api
+		auth = fetch_secret()
+		self.__stream = Stream(auth, listener=self)
+		print("Fetching Tweets...")
+		self.__stream.filter(track=phrases)
 
 	def on_data(self, data):
 		global f
@@ -70,7 +77,7 @@ def exit_gracefully(signum, frame):
 			print("Shutting down...")
 			GetNumOfTweets()
 			f.close()
-			stream.disconnect()
+			#stream.disconnect()
 			sys.exit(1)
 
 	except KeyboardInterrupt:
@@ -86,12 +93,10 @@ if  __name__ == '__main__':
 	# store the original SIGINT handler
 	original_sigint = signal.getsignal(signal.SIGINT)
 
+	phrases = []
+	# Take input Phrase from user 
+	phrase = input("\nEnter search phrase: ")
+	phrases.append(phrase)
+
 	# Twitter authentication and the connection to Twitter streaming API
-	listner = StdOutListener()
-	auth = fetch_secret()
-	stream = Stream(auth, listner)
-
-	print("Fetching Tweets...")
-
-	# Filter out the Twitter Stream to Capture on Keyword 
-	stream.filter(track=['Java'])
+	listner = TwitterListener(phrases)
