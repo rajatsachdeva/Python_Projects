@@ -2,3 +2,4 @@
 secret/auth.txt
 data/twitter_data.txt
 *.swp
+*.pyc
