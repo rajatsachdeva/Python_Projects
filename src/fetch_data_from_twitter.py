@@ -56,6 +56,7 @@ def GetNumOfTweets():
 		count = count + 1
 
 	print(str(count)+" Tweets fetched !")
+	f.close()
 
 
 # Signal Handler
