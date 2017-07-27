@@ -47,6 +47,17 @@ class StdOutListener (StreamListener):
 		print ("ERROR: ",status)
 		f.write (str(status))
 
+
+# Number of tweets captured
+def GetNumOfTweets():
+	f = open(FILEPATH, "r")
+	count = 0
+	for i in f.readlines():
+		count = count + 1
+
+	print(str(count)+" Tweets fetched !")
+
+
 # Signal Handler
 def exit_gracefully(signum, frame):
     # restore the original signal handler as otherwise evil things will happen
@@ -55,6 +66,8 @@ def exit_gracefully(signum, frame):
 	global f
 	try:
 		if input("\nReally quit? (y/n)> ").lower().startswith('y'):
+			print("Shutting down...")
+			GetNumOfTweets()
 			f.close()
 			stream.disconnect()
 			sys.exit(1)
@@ -64,12 +77,11 @@ def exit_gracefully(signum, frame):
 		f.close()
 		sys.exit(1)
 
-    # restore the exit gracefully handler here    
-	signal.signal(signal.SIGINT, exit_gracefully)
+# restore the exit gracefully handler here    
+signal.signal(signal.SIGINT, exit_gracefully)
 
 if  __name__ == '__main__':
 
-	authdict = {}
 	# store the original SIGINT handler
 	original_sigint = signal.getsignal(signal.SIGINT)
 

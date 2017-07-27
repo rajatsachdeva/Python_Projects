@@ -1,0 +1,7 @@
+OUTPUT
+======
+Fetching Tweets...
+^C
+Really quit? (y/n)> y
+Shutting down...
+8 Tweets fetched !
