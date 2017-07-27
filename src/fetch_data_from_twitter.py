@@ -19,6 +19,7 @@ f=open(FILEPATH, 'w')
 
 # Fetch the access token and consumer key from secret folder
 def fetch_secret():
+
 	f = open(SECRETFILEPATH, 'r')
 	authdict = {}
 
@@ -30,8 +31,10 @@ def fetch_secret():
 	access_token_secret = authdict['access_token_secret']
 	consumer_key        = authdict['consumer_key']
 	consumer_secret     = authdict['consumer_secret']
+
 	auth = OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
+
 	return auth
 
 # Basic listener that just prints received tweets to stdout
