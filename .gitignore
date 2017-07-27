@@ -3,3 +3,5 @@ secret/auth.txt
 data/twitter_data.txt
 *.swp
 *.pyc
+Tweets_Fetcher/secret/*
+Tweets_Fetcher/data/
