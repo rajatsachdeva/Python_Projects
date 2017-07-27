@@ -86,9 +86,9 @@ if  __name__ == '__main__':
 	original_sigint = signal.getsignal(signal.SIGINT)
 
 	# Twitter authentication and the connection to Twitter streaming API
-	l = StdOutListener()
+	listner = StdOutListener()
 	auth = fetch_secret()
-	stream = Stream(auth, l)
+	stream = Stream(auth, listner)
 
 	print("Fetching Tweets...")
 
